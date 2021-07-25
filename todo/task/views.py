@@ -1,8 +1,9 @@
-from django.http import request
+from django.http import request, JsonResponse
 from django.shortcuts import redirect, render
 from .forms import TaskFrom
 from .models import Task
 from django.views.generic import View
+from django.forms.models import model_to_dict
 
 class Tasklist(View):
     def get(self,request): 
@@ -15,7 +16,7 @@ class Tasklist(View):
 
         if form.is_valid():
             new_task=form.save()
-            return redirect('task_list_url')
+            return JsonResponse({'amarvar':model_to_dict(new_task)},status=200)
 
         else:
             return redirect('task_list_url')
