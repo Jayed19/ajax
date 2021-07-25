@@ -6,4 +6,6 @@ urlpatterns = [
   
     path('', Tasklist.as_view(), name='task_list_url'),
     path('<str:id>/completed/', Taskcompleted.as_view(), name='task_completed'),
+
+    path('<str:id>/delete/', Taskdelete.as_view(), name='task_delete'),
 ]

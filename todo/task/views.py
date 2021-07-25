@@ -30,3 +30,10 @@ class Taskcompleted(View):
         return JsonResponse({'amarvar':model_to_dict(taskobjmodel)},status=200)
 
 
+class Taskdelete(View):
+    def post(self,request,id):
+        taskmodelobj2=Task.objects.get(id=id)
+        taskmodelobj2.delete()
+        return JsonResponse({'result':'ok'},status=200)
+
+

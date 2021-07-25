@@ -39,15 +39,38 @@ $(document).ready(function(){
           success: function(){
               var carditem=$('#taskcard[data-id="'+dataidno+'"]');
               carditem.css('text-decoration','line-through');
-              $("#listoftask").append(carditem);
+              
 
           }
 
       })
       
 
-  }).on('click','button.close',function(event){
+  }).on('click','#closebutton',function(event){
       event.stopPropagation();
+      var dataid=$(this).data('no');
+    
+
+     
+
+    $.ajax({
+
+     url: '/task/'+dataid+'/delete/',
+     data: {
+
+        csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+        id: dataid
+     },
+     type: 'POST',
+     dataType: 'json',
+     success: function(){
+         $('#taskcard[data-id="'+dataid+'"]').remove();
+     }
+
+    })
+
+
+
   })
 
 
