@@ -21,4 +21,12 @@ class Tasklist(View):
         else:
             return redirect('task_list_url')
 
+        
+class Taskcompleted(View):
+    def post(self,request,id):
+        taskobjmodel=Task.objects.get(id=id)
+        taskobjmodel.completed=True
+        taskobjmodel.save()
+        return JsonResponse({'amarvar':model_to_dict(taskobjmodel)},status=200)
+
 
